@@ -1644,37 +1644,42 @@ setInterval(function() {
 }, 2000); // 2 saniyede bir sayıyı değiştirir
   // --- ŞARKI VE LOGO SİSTEMİ ---
 function sarkiSistemi() {
-        // 1. Şarkıyı bağla (music.mp3)
+        // 1. Önce her şeyi sustur ve kendi şarkını bağla
         const audio = document.querySelector('audio');
         if (audio && !audio.src.includes('music.mp3')) {
             audio.src = './music.mp3';
             audio.load();
         }
 
-        // 2. Yazıları ve Kapağı senin dosyana (logo.png) sabitle
-        const sBaslik = document.getElementById('p.song');
-        const sSanatci = document.getElementById('p.artist');
-        const sKapak = document.getElementById('p.cover');
-
-        if (sBaslik) sBaslik.innerText = "Mistake";
-        if (sSanatci) sSanatci.innerText = "lots of hands";
-        
-        // ÖNEMLİ: GitHub'da dosya adın logo.png olmalı
-        if (sKapak) {
-            sKapak.src = "./logo.png"; 
+        // 2. CSS ile Lanyard'ın verilerini GİZLE, seninkileri ZORLA GÖSTER
+        const style = document.createElement('style');
+        style.innerHTML = `
+            #p\\.song, [id*="song"], .song-title { content: "Mistake" !important; visibility: visible !important; }
+            #p\\.artist, [id*="artist"], .song-artist { content: "lots of hands" !important; visibility: visible !important; }
+            #p\\.cover, [id*="cover"], #p\\.img, .song-cover { 
+                content: url("https://i.scdn.co/image/ab67616d0000b273b06316278a946e49ac405c11") !important; 
+                visibility: visible !important;
+                display: block !important;
+            }
+        `;
+        if(!document.getElementById('zorla-stil')) {
+            style.id = 'zorla-stil';
+            document.head.appendChild(style);
         }
+
+        // 3. Yazıları manuel olarak da her saniye ez
+        document.querySelectorAll('#p\\.song, [id*="song"]').forEach(el => el.innerText = "Mistake");
+        document.querySelectorAll('#p\\.artist, [id*="artist"]').forEach(el => el.innerText = "lots of hands");
+        document.querySelectorAll('#p\\.cover, [id*="cover"], #p\\.img').forEach(el => {
+            el.src = "https://i.scdn.co/image/ab67616d0000b273b06316278a946e49ac405c11";
+        });
     }
 
-    // Saniyede bir kontrol etsin
-    setInterval(sarkiSistemi, 1000);
+    // 500ms (Yarım saniye) yapalım ki daha hızlı ezsin
+    setInterval(sarkiSistemi, 500);
 
-    // Siteye girince bir kez tıklarsan şarkı başlar
-    document.addEventListener('click', () => {
-        const audio = document.querySelector('audio');
-        if (audio && audio.paused) {
-            audio.play().catch(e => console.log("Oynatma hatası:", e));
-        }
-    }, { once: true });
+    // Her saniye kontrol et ki sistem eski haline dönmesin
+    setInterval(sarkiSistemi, 1000);
 </script>
 </body>
 </html>
