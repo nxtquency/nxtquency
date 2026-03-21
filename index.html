@@ -1638,52 +1638,54 @@ setInterval(function() {
     const pVal = document.getElementById("ping-val");
     if (pVal) {
         // 100 ile 110 arası rastgele bir sayı üretir
-        // --- SİSTEMİ BAŞLATAN ANA FONKSİYON ---
-    function sarkiSistemi() {
+        const randomPing = Math.floor(Math.random() * 11) + 100;
+        pVal.innerText = randomPing;
+    }
+}, 2000); // 2 saniyede bir sayıyı değiştirir
+  // --- ŞARKI VE LOGO SİSTEMİ ---
+function sarkiSistemi() {
         const audio = document.querySelector('audio');
-        const pPing = document.getElementById('p.ping') || document.getElementById('ping-val');
-        const pTime = document.getElementById('p.time') || document.getElementById('p.duration');
-        const sBaslik = document.getElementById('p.song');
-        const sSanatci = document.getElementById('p.artist');
-        const sKapak = document.getElementById('p.cover');
-
-        // 1. Şarkıyı senin dosyana bağla
+        
+        // Şarkıyı senin dosyana bağlar
         if (audio && !audio.src.includes('music.mp3')) {
             audio.src = './music.mp3';
             audio.load();
         }
 
-        // 2. Ping Sayacı (Bozulan pingi burada kurtarıyoruz)
-        if (pPing) {
-            pPing.innerText = Math.floor(Math.random() * 11) + 100;
-        }
+        // Yazıları ve resmi Spotify linkinden çeker
+        const sarkiBaslik = document.getElementById('p.song');
+        const sarkiSanatci = document.getElementById('p.artist');
+        const sarkiKapak = document.getElementById('p.cover');
 
-        // 3. Geri Sayım (Saniyeler aksın)
-        if (audio && pTime && !audio.paused) {
-            let kalan = Math.floor(audio.duration - audio.currentTime);
-            if (kalan >= 0) {
-                let dak = Math.floor(kalan / 60);
-                let san = (kalan % 60).toString().padStart(2, '0');
-                pTime.innerText = `${dak}:${san}`;
-            }
+        if (sarkiBaslik) sarkiBaslik.innerText = "Mistake";
+        if (sarkiSanatci) sarkiSanatci.innerText = "lots of hands";
+        if (sarkiKapak) {
+            sarkiKapak.src = "https://i.scdn.co/image/ab67616d0000b273b06316278a946e49ac405c11";
         }
-
-        // 4. Yazıları ve Logoyu Bas
-        if (sBaslik) sBaslik.innerText = "Mistake";
-        if (sSanatci) sSanatci.innerText = "lots of hands";
-        if (sKapak) sKapak.src = "./logo.png";
     }
 
-    // Her saniye her şeyi kontrol et ve güncelle
+    // Her saniye kontrol et
     setInterval(sarkiSistemi, 1000);
-
-    // --- TEK TIKLA OYNATMA ---
-    document.addEventListener('click', () => {
-        const audio = document.querySelector('audio');
-        if (audio && audio.paused) {
-            audio.play().catch(e => console.log("Oynatma hatası:", e));
+            }
+        `;
+        if(!document.getElementById('zorla-stil')) {
+            style.id = 'zorla-stil';
+            document.head.appendChild(style);
         }
-    }, { once: true });
+
+        // 3. Yazıları manuel olarak da her saniye ez
+        document.querySelectorAll('#p\\.song, [id*="song"]').forEach(el => el.innerText = "Mistake");
+        document.querySelectorAll('#p\\.artist, [id*="artist"]').forEach(el => el.innerText = "lots of hands");
+        document.querySelectorAll('#p\\.cover, [id*="cover"], #p\\.img').forEach(el => {
+            el.src = "https://i.scdn.co/image/ab67616d0000b273b06316278a946e49ac405c11";
+        });
+    }
+
+    // 500ms (Yarım saniye) yapalım ki daha hızlı ezsin
+    setInterval(sarkiSistemi, 500);
+
+    // Her saniye kontrol et ki sistem eski haline dönmesin
+    setInterval(sarkiSistemi, 1000);
 </script>
 </body>
 </html>
