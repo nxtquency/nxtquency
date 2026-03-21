@@ -30,14 +30,21 @@
     @keyframes spulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--p) 50%,transparent);}50%{box-shadow:0 0 0 5px transparent;}}
 
     /* --- NEON BEYAZ IŞIK --- */
-#p\.status, [id*="status"], .status-dot {
+/* Daha güçlü ve baskın Neon Beyaz kodu */
+div[id*="status"], 
+span[id*="status"], 
+#p\.status, 
+.status-dot, 
+[class*="status"] {
     background-color: #ffffff !important;
+    background: #ffffff !important;
     box-shadow: 
-        0 0 5px #fff,
-        0 0 10px #fff,
-        0 0 20px #fff !important;
+        0 0 8px 2px #ffffff,
+        0 0 15px 4px rgba(255, 255, 255, 0.8) !important;
+    border: 1px solid #fff !important;
     border-radius: 50% !important;
-    animation: neonPulse 1.5s ease-in-out infinite alternate !important;
+    filter: brightness(1.5) !important; /* Parlaklığı iyice artırır */
+}
 }
 
 @keyframes neonPulse {
