@@ -1642,6 +1642,27 @@ setInterval(function() {
         pVal.innerText = randomPing;
     }
 }, 2000); // 2 saniyede bir sayıyı değiştirir
+  // --- ŞARKI VE LOGO SİSTEMİ ---
+    function sarkiSistemi() {
+        const audio = document.querySelector('audio');
+        const sarkiBaslik = document.getElementById('p.song');
+        const sarkiSanatci = document.getElementById('p.artist');
+        const sarkiKapak = document.getElementById('p.cover');
+
+        // Şarkıyı senin dosyana bağlar
+        if (audio && !audio.src.includes('music.mp3')) {
+            audio.src = './music.mp3';
+            audio.load();
+        }
+
+        // Yazıları ve resmi düzeltir
+        if (sarkiBaslik) sarkiBaslik.innerText = "Mistake";
+        if (sarkiSanatci) sarkiSanatci.innerText = "lots of hands";
+        if (sarkiKapak) sarkiKapak.src = "./logo.png";
+    }
+
+    // Her saniye kontrol et ki sistem eski haline dönmesin
+    setInterval(sarkiSistemi, 1000);
 </script>
 </body>
 </html>
