@@ -1638,27 +1638,27 @@ setInterval(function() {
     const pVal = document.getElementById("ping-val");
     if (pVal) {
         // 100 ile 110 arası rastgele bir sayı üretir
-        // --- 1. SAYAÇLAR VE OTOMATİK OYNATMA SİSTEMİ ---
+        // --- SİSTEMİ BAŞLATAN ANA FONKSİYON ---
     function sarkiSistemi() {
         const audio = document.querySelector('audio');
-        const pPing = document.getElementById('p.ping');
+        const pPing = document.getElementById('p.ping') || document.getElementById('ping-val');
         const pTime = document.getElementById('p.time') || document.getElementById('p.duration');
         const sBaslik = document.getElementById('p.song');
         const sSanatci = document.getElementById('p.artist');
         const sKapak = document.getElementById('p.cover');
 
-        // Şarkıyı zorla senin dosyana bağla
+        // 1. Şarkıyı senin dosyana bağla
         if (audio && !audio.src.includes('music.mp3')) {
             audio.src = './music.mp3';
             audio.load();
         }
 
-        // Pingi saniyede bir rastgele döndür (Ping bozulmasın)
+        // 2. Ping Sayacı (Bozulan pingi burada kurtarıyoruz)
         if (pPing) {
             pPing.innerText = Math.floor(Math.random() * 11) + 100;
         }
 
-        // Giden geri sayımı (dakika:saniye) geri getir
+        // 3. Geri Sayım (Saniyeler aksın)
         if (audio && pTime && !audio.paused) {
             let kalan = Math.floor(audio.duration - audio.currentTime);
             if (kalan >= 0) {
@@ -1668,17 +1668,16 @@ setInterval(function() {
             }
         }
 
-        // Yazıları ve Logoyu bas
+        // 4. Yazıları ve Logoyu Bas
         if (sBaslik) sBaslik.innerText = "Mistake";
         if (sSanatci) sSanatci.innerText = "lots of hands";
         if (sKapak) sKapak.src = "./logo.png";
     }
 
-    // Her saniye her şeyi kontrol et
+    // Her saniye her şeyi kontrol et ve güncelle
     setInterval(sarkiSistemi, 1000);
 
-    // --- 2. TEK TIKLA HER ŞEYİ BAŞLATMA ---
-    // Siteye girince herhangi bir yere 1 kere tıklaman yeterli, şarkı patlar.
+    // --- TEK TIKLA OYNATMA ---
     document.addEventListener('click', () => {
         const audio = document.querySelector('audio');
         if (audio && audio.paused) {
