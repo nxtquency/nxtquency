@@ -1643,5 +1643,55 @@ setInterval(function() {
     }
 }, 2000); // 2 saniyede bir sayıyı değiştirir
 </script>
+  <style>
+    .custom-trigger {
+        position: fixed; bottom: 25px; right: 25px; z-index: 999999;
+        width: 55px; height: 55px; border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        cursor: pointer; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    .custom-trigger:hover { transform: scale(1.1) rotate(10deg); background: rgba(255, 255, 255, 0.2); }
+    .custom-trigger img { width: 80%; height: 80%; border-radius: 50%; object-fit: cover; }
+    
+    .video-popup {
+        position: fixed; bottom: 95px; right: 25px; z-index: 999999;
+        width: 200px; border-radius: 15px; overflow: hidden;
+        background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        transform: translateY(20px) scale(0.8); opacity: 0; pointer-events: none;
+        transition: all 0.4s ease;
+    }
+    .video-popup.active { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
+</style>
+
+<div class="video-popup" id="v-popup">
+    <video id="myEdit" width="100%" loop playsinline>
+        <source src="./edit.mp4" type="video/mp4">
+    </video>
+</div>
+
+<div class="custom-trigger" id="main-btn">
+    <img src="./logo.png" alt="logo">
+</div>
+
+<script>
+    const mainBtn = document.getElementById('main-btn');
+    const vPopup = document.getElementById('v-popup');
+    const myVid = document.getElementById('myEdit');
+
+    mainBtn.onclick = function() {
+        vPopup.classList.toggle('active');
+        if (vPopup.classList.contains('active')) {
+            myVid.play();
+            myVid.muted = false;
+        } else {
+            myVid.pause();
+        }
+    };
+</script>
 </body>
 </html>
