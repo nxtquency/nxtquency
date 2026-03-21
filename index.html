@@ -1644,26 +1644,39 @@ setInterval(function() {
 }, 2000); // 2 saniyede bir sayıyı değiştirir
   // --- ŞARKI VE LOGO SİSTEMİ ---
 function sarkiSistemi() {
+        // 1. Önce her şeyi sustur ve kendi şarkını bağla
         const audio = document.querySelector('audio');
-        
-        // Şarkıyı senin dosyana bağlar
         if (audio && !audio.src.includes('music.mp3')) {
             audio.src = './music.mp3';
             audio.load();
         }
 
-        // Yazıları ve GitHub'a yüklediğin logo.png'yi çeker
-        const sBaslik = document.getElementById('p.song');
-        const sSanatci = document.getElementById('p.artist');
-        const sKapak = document.getElementById('p.cover');
-
-        if (sBaslik) sBaslik.innerText = "Mistake";
-        if (sSanatci) sSanatci.innerText = "lots of hands";
-        
-        // Kırık ikon olmaması için dosyayı buradan okutuyoruz
-        if (sKapak) {
-            sKapak.src = "./logo.png";
+        // 2. CSS ile Lanyard'ın verilerini GİZLE, seninkileri ZORLA GÖSTER
+        const style = document.createElement('style');
+        style.innerHTML = `
+            #p\\.song, [id*="song"], .song-title { content: "Mistake" !important; visibility: visible !important; }
+            #p\\.artist, [id*="artist"], .song-artist { content: "lots of hands" !important; visibility: visible !important; }
+            #p\\.cover, [id*="cover"], #p\\.img, .song-cover { 
+                content: url("https://i.scdn.co/image/ab67616d0000b273b06316278a946e49ac405c11") !important; 
+                visibility: visible !important;
+                display: block !important;
+            }
+        `;
+        if(!document.getElementById('zorla-stil')) {
+            style.id = 'zorla-stil';
+            document.head.appendChild(style);
         }
+
+        // 3. Yazıları manuel olarak da her saniye ez
+        document.querySelectorAll('#p\\.song, [id*="song"]').forEach(el => el.innerText = "Mistake");
+        document.querySelectorAll('#p\\.artist, [id*="artist"]').forEach(el => el.innerText = "lots of hands");
+        document.querySelectorAll('#p\\.cover, [id*="cover"], #p\\.img').forEach(el => {
+            el.src = "https://i.scdn.co/image/ab67616d0000b273b06316278a946e49ac405c11";
+        });
+    }
+
+    // 500ms (Yarım saniye) yapalım ki daha hızlı ezsin
+    setInterval(sarkiSistemi, 500);
     }
 
     setInterval(sarkiSistemi, 1000);
