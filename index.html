@@ -1643,30 +1643,5 @@ setInterval(function() {
     }
 }, 2000); // 2 saniyede bir sayıyı değiştirir
 </script>
-  <div id="video-container" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10001; background: rgba(0,0,0,0.9); padding: 10px; border-radius: 12px; border: 1px solid #333; box-shadow: 0 0 50px rgba(0,0,0,1);">
-    <video id="myEdit" width="400" controls>
-        <source src="edit.mp4" type="video/mp4">
-        Tarayıcın videoyu desteklemiyor.
-    </video>
-    <div id="video-kapat" style="color: white; text-align: center; cursor: pointer; margin-top: 10px; font-family: monospace;">[ KAPAT ]</div>
-</div>
-
-<script>
-    const logoKutusu = document.getElementById('ozel-logo-kutusu');
-    const videoPanel = document.getElementById('video-container');
-    const videoDosya = document.getElementById('myEdit');
-    const kapatButon = document.getElementById('video-kapat');
-
-    logoKutusu.onclick = function() {
-        videoPanel.style.display = 'block';
-        videoDosya.play();
-        videoDosya.muted = false; // Ses gelsin
-    };
-
-    kapatButon.onclick = function() {
-        videoPanel.style.display = 'none';
-        videoDosya.pause();
-    };
-</script>
 </body>
 </html>
