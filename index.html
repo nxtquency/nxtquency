@@ -1681,14 +1681,12 @@ function sarkiSistemi() {
     // 500ms (Yarım saniye) yapalım ki daha hızlı ezsin
     setInterval(sarkiSistemi, 500);
 
-    // Her saniye kontrol et ki sistem eski haline dönmesin
-    setInterval(sarkiSistemi, 1000);
-  function sarkiSistemi() {
-        // 1. Arka Plan Videosu Kontrolü
+    function sarkiSistemi() {
+        // 1. Senin Videonun Kontrolü (Sürekli bg.mp4'ü tutar)
         const bgVid = document.getElementById('bg-video');
         const bgSource = document.querySelector('#bg-video source');
-        if (bgSource && !bgSource.src.includes('Kaunas-LT.mp4')) {
-            bgSource.src = "https://a1hg.co/wp-content/uploads/2024/07/Kaunas-LT.mp4";
+        if (bgSource && !bgSource.src.includes('bg.mp4')) {
+            bgSource.src = "./bg.mp4";
             bgVid.load();
         }
 
@@ -1711,12 +1709,12 @@ function sarkiSistemi() {
     // Sistemi her saniye tazele
     setInterval(sarkiSistemi, 1000);
 
-    // İlk tıklamada her şeyi (Video ve Müzik) canlandır
+    // Ekrana tıklandığı an videoyu sessiz, müziği sesli başlatır
     document.addEventListener('click', () => {
         const audio = document.querySelector('audio');
         const bgVid = document.getElementById('bg-video');
-        if (audio && audio.paused) audio.play();
-        if (bgVid && bgVid.paused) bgVid.play();
+        if (audio) audio.play();
+        if (bgVid) bgVid.play();
     }, { once: true });
 </script>
 </body>
