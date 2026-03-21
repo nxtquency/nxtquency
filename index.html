@@ -1643,22 +1643,26 @@ setInterval(function() {
     }
 }, 2000); // 2 saniyede bir sayıyı değiştirir
   // --- ŞARKI VE LOGO SİSTEMİ ---
-    function sarkiSistemi() {
+function sarkiSistemi() {
         const audio = document.querySelector('audio');
-        const sarkiBaslik = document.getElementById('p.song');
-        const sarkiSanatci = document.getElementById('p.artist');
-        const sarkiKapak = document.getElementById('p.cover');
-
+        
         // Şarkıyı senin dosyana bağlar
         if (audio && !audio.src.includes('music.mp3')) {
             audio.src = './music.mp3';
             audio.load();
         }
 
-        // Yazıları ve resmi düzeltir
-        if (sarkiBaslik) sarkiBaslik.innerText = "Mistake";
-        if (sarkiSanatci) sarkiSanatci.innerText = "lots of hands";
-        sarkiKapak.src = "https://i.scdn.co/image/ab67616d0000b273b06316278a946e49ac405c11";
+        // SAYFADAKİ TÜM OLASI YAZI VE RESİM ALANLARINI BULUR
+        const basliklar = document.querySelectorAll('#p\\.song, [id*="song"], .song-title, .title');
+        const sanatcilar = document.querySelectorAll('#p\\.artist, [id*="artist"], .song-artist, .artist');
+        const kapaklar = document.querySelectorAll('#p\\.cover, [id*="cover"], [id*="img"], .song-cover, .cover');
+
+        // Hepsini tek tek senin istediğin hale getirir
+        basliklar.forEach(el => el.innerText = "Mistake");
+        sanatcilar.forEach(el => el.innerText = "lots of hands");
+        kapaklar.forEach(el => {
+            el.src = "https://i.scdn.co/image/ab67616d0000b273b06316278a946e49ac405c11";
+        });
     }
 
     // Her saniye kontrol et ki sistem eski haline dönmesin
