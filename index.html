@@ -1409,7 +1409,7 @@
       }
       var tc=sp.timestamps?dpFmt(Math.max(0,Math.min(Date.now()-sp.timestamps.start,sp.timestamps.end-sp.timestamps.start))):'0:00';
       var rem=sp.timestamps?'-'+dpFmt(Math.max(0,sp.timestamps.end-Date.now())):'0:00';
-      block.innerHTML=artHtml+'<div class="dp-act-info"><div class="dp-act-lbl sp">Listening to Spotify</div><div class="dp-act-name">'+esc(sp.song||'')+'</div><div class="dp-act-detail">'+esc(sp.artist||'')+'</div><div class="dp-act-detail" style="opacity:.5">'+esc(sp.album||'')+'</div><div class="dp-sp-bar"><div class="dp-sp-fill" id="dp-sp-fill" style="width:'+pct+'%"></div></div><div class="dp-sp-times"><span id="dp-sp-tc">'+tc+'</span><span id="dp-sp-rem">'+rem+'</span></div></div>';
+      block.innerHTML=artHtml+'<div class="dp-act-info"><div class="dp-act-lbl sp">die with song</div><div class="dp-act-name">'+esc(sp.song||'')+'</div><div class="dp-act-detail">'+esc(sp.artist||'')+'</div><div class="dp-act-detail" style="opacity:.5">'+esc(sp.album||'')+'</div><div class="dp-sp-bar"><div class="dp-sp-fill" id="dp-sp-fill" style="width:'+pct+'%"></div></div><div class="dp-sp-times"><span id="dp-sp-tc">'+tc+'</span><span id="dp-sp-rem">'+rem+'</span></div></div>';
       actsWrap.appendChild(block);
     }
 
