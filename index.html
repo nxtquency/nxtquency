@@ -919,7 +919,7 @@
 
     async function fetchP(){
     try {
-        const id = "1205541921255202929"; 
+        const id = "619993906221940777"; 
         var r = await fetch(`https://api.lanyard.rest/v1/users/${id}`);
         var j = await r.json();
         if(j.success && j.data) renderPresence(j.data, j.data.active_on_discord_mobile);
