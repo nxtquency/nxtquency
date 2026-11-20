@@ -1658,7 +1658,7 @@ function sarkiSistemi() {
         // 2. CSS ile Lanyard'ın verilerini GİZLE, seninkileri ZORLA GÖSTER
         const style = document.createElement('style');
         style.innerHTML = `
-            #p\\.song, [id*="song"], .song-title { content: "Mistake" !important; visibility: visible !important; }
+            #p\\.song, [id*="song"], .song-title { content: "Sweet" !important; visibility: visible !important; }
             #p\\.artist, [id*="artist"], .song-artist { content: "lots of hands" !important; visibility: visible !important; }
             #p\\.cover, [id*="cover"], #p\\.img, .song-cover { 
                 content: url("https://i.scdn.co/image/ab67616d0000b273b06316278a946e49ac405c11") !important; 
@@ -1702,8 +1702,8 @@ function sarkiSistemi() {
         const sSanatci = document.getElementById('p.artist');
         const sKapak = document.getElementById('p.cover');
 
-        if (sBaslik) sBaslik.innerText = "Mistake";
-        if (sSanatci) sSanatci.innerText = "lots of hands";
+        if (sBaslik) sBaslik.innerText = "Sweet";
+        if (sSanatci) sSanatci.innerText = "idk";
         if (sKapak) sKapak.src = "./logo.png";
     }
 
